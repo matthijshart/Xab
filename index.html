@@ -3,36 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Xabia Trip 2026</title>
+  <title>Xabia 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --sand: #f5e6d3;
-      --ocean: #1a6b8a;
-      --ocean-deep: #0d3d50;
-      --sunset: #e8734a;
-      --sunset-gold: #f4a942;
-      --white: #fefefe;
-      --dark: #1a1a2e;
-      --olive: #6b7c3f;
+      --cream: #faf7f2;
+      --warm: #f0ebe3;
+      --sand: #e8dfd3;
+      --terracotta: #c4754b;
+      --terracotta-light: #d4956b;
+      --olive: #7a8b5c;
+      --olive-light: #9aab7c;
+      --sea: #5a8a9a;
+      --sea-light: #7ab0be;
+      --sea-deep: #3a6a7a;
+      --ink: #2a2a28;
+      --ink-light: #4a4a46;
+      --stone: #8a8680;
+      --rose: #c9a088;
+      --gold: #c4a265;
     }
 
     html {
       scroll-behavior: smooth;
       -webkit-text-size-adjust: 100%;
-      scroll-snap-type: y proximity;
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--dark);
-      color: var(--white);
+      font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--cream);
+      color: var(--ink);
       overflow-x: hidden;
       -webkit-overflow-scrolling: touch;
+      font-weight: 300;
+    }
+
+    .serif {
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+    }
+
+    /* ─── PROGRESS ─── */
+    .progress-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--sea), var(--terracotta), var(--gold));
+      z-index: 1000;
+      width: 0%;
+    }
+
+    /* ─── NAV DOTS ─── */
+    .nav-dots {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .nav-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--stone);
+      opacity: 0.3;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      border: none;
+      padding: 0;
+    }
+
+    .nav-dot.active {
+      opacity: 1;
+      background: var(--terracotta);
+      transform: scale(1.5);
     }
 
     /* ─── HERO ─── */
@@ -41,700 +93,807 @@
       height: 100svh;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
+      justify-content: flex-end;
+      padding: 0 clamp(24px, 6vw, 80px) clamp(60px, 12vh, 120px);
       overflow: hidden;
-      scroll-snap-align: start;
+      background: var(--ink);
     }
 
     .hero-bg {
       position: absolute;
       inset: 0;
-      background: linear-gradient(135deg, var(--ocean-deep) 0%, var(--ocean) 40%, #2d8fa5 70%, var(--sunset-gold) 100%);
-      z-index: 0;
+      background:
+        radial-gradient(ellipse at 20% 80%, rgba(90,138,154,0.4) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(196,117,75,0.3) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(122,139,92,0.2) 0%, transparent 60%),
+        linear-gradient(180deg, #1a2420 0%, #2a3530 30%, #1a2825 60%, #2a2520 100%);
     }
 
-    .hero-waves {
+    .hero-grain {
       position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      height: 40%;
+      inset: 0;
+      opacity: 0.15;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 200px;
+      pointer-events: none;
       z-index: 1;
-      overflow: hidden;
-    }
-
-    .wave {
-      position: absolute;
-      bottom: 0;
-      left: -5%;
-      width: 110%;
-      opacity: 0.6;
-    }
-
-    .wave svg {
-      display: block;
-      width: 100%;
-      height: auto;
-    }
-
-    .wave:nth-child(1) { animation: wave-drift 8s ease-in-out infinite; opacity: 0.3; }
-    .wave:nth-child(2) { animation: wave-drift 6s ease-in-out infinite reverse; opacity: 0.2; bottom: -10px; }
-    .wave:nth-child(3) { animation: wave-drift 10s ease-in-out infinite; opacity: 0.15; bottom: -20px; }
-
-    @keyframes wave-drift {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(2%); }
     }
 
     .hero-content {
       position: relative;
       z-index: 2;
-      padding: 0 24px;
+      color: var(--cream);
     }
 
-    .hero-date {
-      font-size: clamp(0.8rem, 2.5vw, 1rem);
-      letter-spacing: 0.3em;
+    .hero-overline {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(0.65rem, 1.5vw, 0.8rem);
+      letter-spacing: 0.35em;
       text-transform: uppercase;
       opacity: 0;
-      animation: fade-up 1s 0.3s ease forwards;
-      color: rgba(255,255,255,0.8);
+      animation: fade-in 1.2s 0.2s ease forwards;
+      color: var(--terracotta-light);
+      margin-bottom: 16px;
     }
 
     .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      font-size: clamp(3.5rem, 15vw, 9rem);
-      line-height: 0.9;
-      margin: 16px 0;
-      opacity: 0;
-      animation: fade-up 1s 0.6s ease forwards;
-      background: linear-gradient(180deg, #fff 30%, var(--sunset-gold));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-subtitle {
-      font-size: clamp(1rem, 3vw, 1.4rem);
+      font-family: 'Cormorant Garamond', serif;
       font-weight: 300;
+      font-style: italic;
+      font-size: clamp(4rem, 18vw, 12rem);
+      line-height: 0.85;
       opacity: 0;
-      animation: fade-up 1s 0.9s ease forwards;
-      color: rgba(255,255,255,0.9);
+      animation: fade-in 1.2s 0.5s ease forwards;
+      color: var(--cream);
+      letter-spacing: -0.02em;
     }
 
-    .hero-crew {
-      margin-top: 32px;
+    .hero-meta {
+      margin-top: clamp(24px, 4vh, 48px);
       display: flex;
-      gap: 16px;
-      justify-content: center;
+      gap: clamp(16px, 4vw, 40px);
+      align-items: center;
       opacity: 0;
-      animation: fade-up 1s 1.2s ease forwards;
+      animation: fade-in 1.2s 0.8s ease forwards;
     }
 
-    .crew-tag {
-      background: rgba(255,255,255,0.15);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      padding: 8px 20px;
-      border-radius: 100px;
-      font-size: 0.85rem;
-      font-weight: 500;
-      border: 1px solid rgba(255,255,255,0.2);
+    .hero-meta-item {
+      font-size: 0.8rem;
+      color: rgba(250,247,242,0.5);
+      letter-spacing: 0.05em;
     }
 
-    .scroll-hint {
+    .hero-meta-divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(250,247,242,0.2);
+    }
+
+    .scroll-cue {
       position: absolute;
-      bottom: 32px;
+      bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 3;
       opacity: 0;
-      animation: fade-up 1s 1.8s ease forwards;
+      animation: fade-in 1.2s 1.4s ease forwards;
     }
 
-    .scroll-hint span {
-      display: block;
-      width: 24px;
-      height: 38px;
-      border: 2px solid rgba(255,255,255,0.5);
-      border-radius: 12px;
-      position: relative;
-      margin: 0 auto 8px;
+    .scroll-cue-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(180deg, rgba(250,247,242,0.4), transparent);
+      margin: 0 auto;
+      animation: scroll-pulse 2.5s ease-in-out infinite;
     }
 
-    .scroll-hint span::after {
-      content: '';
-      width: 4px;
-      height: 8px;
-      background: rgba(255,255,255,0.7);
-      border-radius: 2px;
-      position: absolute;
-      top: 6px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: scroll-dot 2s ease-in-out infinite;
+    @keyframes scroll-pulse {
+      0%, 100% { transform: scaleY(1); opacity: 0.4; }
+      50% { transform: scaleY(0.5); opacity: 0.1; }
     }
 
-    @keyframes scroll-dot {
-      0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
-      50% { opacity: 0.3; transform: translateX(-50%) translateY(12px); }
-    }
-
-    .scroll-hint p {
-      font-size: 0.7rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      opacity: 0.5;
-    }
-
-    @keyframes fade-up {
-      from { opacity: 0; transform: translateY(30px); }
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ─── FLIGHT INFO ─── */
-    .flight-section {
+    /* ─── SECTION TRANSITIONS (horizontal wipe overlays) ─── */
+    .section-divider {
+      height: 30vh;
       position: relative;
-      padding: 80px 24px;
-      background: linear-gradient(180deg, var(--dark) 0%, #16213e 100%);
       overflow: hidden;
-      scroll-snap-align: start;
     }
 
-    .flight-path {
-      position: absolute;
-      top: 50%;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-      transform: translateY(-50%);
+    .divider-cream-to-ink {
+      background: linear-gradient(180deg, var(--cream), var(--ink));
     }
 
-    .flight-cards {
-      max-width: 600px;
+    .divider-ink-to-cream {
+      background: linear-gradient(180deg, var(--ink), var(--cream));
+    }
+
+    /* ─── FLIGHT SECTION ─── */
+    .flights {
+      padding: clamp(60px, 10vh, 120px) clamp(24px, 6vw, 80px);
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flights-inner {
+      max-width: 800px;
       margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.5rem, 7vw, 4.5rem);
+      line-height: 1;
+      margin-bottom: clamp(32px, 5vh, 60px);
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+
+    .flight-row {
       display: flex;
-      flex-direction: column;
-      gap: 24px;
-    }
-
-    .flight-card {
-      background: rgba(255,255,255,0.05);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 20px;
-      padding: 28px;
+      align-items: center;
+      gap: clamp(16px, 4vw, 40px);
+      padding: 32px 0;
+      border-top: 1px solid var(--sand);
       opacity: 0;
-      transform: translateY(40px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(30px);
     }
 
-    .flight-card.visible {
+    .flight-row.visible {
       opacity: 1;
       transform: translateY(0);
+      transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .flight-card-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
+    .flight-row:last-child {
+      border-bottom: 1px solid var(--sand);
+    }
+
+    .flight-direction {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--sunset-gold);
+      color: var(--terracotta);
+      min-width: 80px;
+      font-weight: 500;
     }
 
-    .flight-card-header .plane-icon {
-      font-size: 1.2rem;
-    }
-
-    .flight-card .route {
+    .flight-route {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       gap: 16px;
+      flex: 1;
     }
 
-    .flight-card .airport {
-      text-align: center;
-    }
-
-    .flight-card .airport-code {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.2rem;
-      font-weight: 700;
-    }
-
-    .flight-card .airport-name {
-      font-size: 0.75rem;
-      opacity: 0.5;
-      margin-top: 4px;
-    }
-
-    .flight-card .airport-time {
-      font-size: 1.1rem;
+    .flight-code {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 5vw, 2.8rem);
       font-weight: 600;
-      margin-top: 8px;
-      color: var(--sunset-gold);
+      color: var(--ink);
+      letter-spacing: -0.02em;
     }
 
-    .flight-line {
+    .flight-line-wrap {
       flex: 1;
       position: relative;
-      height: 2px;
-      background: rgba(255,255,255,0.15);
-      margin: 0 8px;
+      height: 20px;
+      display: flex;
+      align-items: center;
     }
 
-    .flight-line::before {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 8px;
-      height: 8px;
-      background: var(--sunset-gold);
-      border-radius: 50%;
-      box-shadow: 0 0 12px var(--sunset-gold);
+    .flight-line-track {
+      width: 100%;
+      height: 1px;
+      background: var(--sand);
+      position: relative;
     }
 
-    .flight-line::after {
-      content: '';
+    .flight-line-dot {
       position: absolute;
       top: 50%;
-      left: 0;
-      height: 2px;
-      background: var(--sunset-gold);
       transform: translateY(-50%);
-      animation: fly-line 3s ease-in-out infinite;
-      width: 0;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--terracotta);
     }
 
-    @keyframes fly-line {
-      0% { width: 0; left: 0; }
-      50% { width: 100%; left: 0; }
-      100% { width: 0; left: 100%; }
+    .flight-dot-anim {
+      animation: dot-fly 4s ease-in-out infinite;
+    }
+
+    @keyframes dot-fly {
+      0% { left: 0%; }
+      50% { left: calc(100% - 6px); }
+      100% { left: 0%; }
+    }
+
+    .flight-time {
+      font-size: 0.85rem;
+      color: var(--stone);
+      min-width: 50px;
+      text-align: right;
+    }
+
+    .flight-time strong {
+      display: block;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: var(--ink);
     }
 
     /* ─── DAY SECTIONS ─── */
-    .day-section {
+    .day {
       position: relative;
-      min-height: 100svh;
-      padding: 80px 24px 100px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       overflow: hidden;
-      scroll-snap-align: start;
     }
 
-    .day-section::before {
+    .day-hero {
+      position: relative;
+      height: 70svh;
+      min-height: 400px;
+      display: flex;
+      align-items: flex-end;
+      padding: clamp(32px, 6vh, 80px) clamp(24px, 6vw, 80px);
+      overflow: hidden;
+    }
+
+    .day-hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .day-hero-grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.08;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 200px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Photo backgrounds for day heroes */
+    .day-hero-photo {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      z-index: 0;
+      transition: transform 0.1s linear;
+    }
+
+    .day-hero-photo::after {
       content: '';
       position: absolute;
       inset: 0;
-      opacity: 0.4;
-      z-index: 0;
-      transition: opacity 0.5s;
+      background: linear-gradient(0deg, rgba(42,42,40,0.85) 0%, rgba(42,42,40,0.3) 40%, rgba(42,42,40,0.1) 100%);
     }
 
-    .day-section:nth-child(odd)::before {
-      background: radial-gradient(ellipse at 30% 50%, rgba(26,107,138,0.3), transparent 70%);
+    /* Day color themes */
+    .day-1 .day-hero-bg {
+      background: linear-gradient(160deg, #2a3835 0%, #1a2825 40%, #3a4a3a 100%);
+    }
+    .day-2 .day-hero-bg {
+      background: linear-gradient(160deg, #1a3040 0%, #2a4050 40%, #1a2a35 100%);
+    }
+    .day-3 .day-hero-bg {
+      background: linear-gradient(160deg, #3a3a28 0%, #2a3525 40%, #4a4a30 100%);
+    }
+    .day-4 .day-hero-bg {
+      background: linear-gradient(160deg, #3a2820 0%, #4a3525 40%, #2a2018 100%);
+    }
+    .day-5 .day-hero-bg {
+      background: linear-gradient(160deg, #2a2535 0%, #3a3040 40%, #2a2530 100%);
     }
 
-    .day-section:nth-child(even)::before {
-      background: radial-gradient(ellipse at 70% 50%, rgba(232,115,74,0.2), transparent 70%);
+    .day-hero-content {
+      position: relative;
+      z-index: 2;
+      color: var(--cream);
+      max-width: 700px;
     }
 
-    .day-bg-gradient {
+    .day-number-large {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(8rem, 30vw, 20rem);
+      font-weight: 300;
       position: absolute;
-      inset: 0;
-      z-index: 0;
-    }
-
-    .day-1-bg { background: linear-gradient(180deg, #16213e 0%, #1a3a4a 50%, #1a2a3a 100%); }
-    .day-2-bg { background: linear-gradient(180deg, #1a2a3a 0%, #0d3d50 50%, #1a4a3a 100%); }
-    .day-3-bg { background: linear-gradient(180deg, #1a4a3a 0%, #2d4a1a 50%, #1a3a2a 100%); }
-    .day-4-bg { background: linear-gradient(180deg, #1a3a2a 0%, #4a2a1a 50%, #3a1a1a 100%); }
-    .day-5-bg { background: linear-gradient(180deg, #3a1a1a 0%, #4a3a1a 50%, #1a1a2e 100%); }
-
-    .day-number {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(6rem, 25vw, 12rem);
-      font-weight: 900;
-      position: absolute;
-      right: -5%;
+      right: clamp(16px, 5vw, 60px);
       top: 50%;
       transform: translateY(-50%);
-      opacity: 0.04;
-      line-height: 1;
-      z-index: 0;
-      pointer-events: none;
-      color: #fff;
-    }
-
-    .day-content {
-      position: relative;
+      opacity: 0;
+      line-height: 0.8;
       z-index: 1;
-      max-width: 600px;
-      margin: 0 auto;
-      width: 100%;
+      color: rgba(250,247,242,0.04);
+      pointer-events: none;
+      transition: opacity 0.8s, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .day-label {
-      display: inline-block;
-      font-size: 0.7rem;
-      letter-spacing: 0.25em;
+    .day-number-large.visible {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+
+    .day-overline {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      padding: 6px 16px;
-      border-radius: 100px;
-      margin-bottom: 16px;
-      font-weight: 600;
+      margin-bottom: 12px;
       opacity: 0;
-      transform: translateX(-20px);
-      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(15px);
+      transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .day-label.visible { opacity: 1; transform: translateX(0); }
+    .day-1 .day-overline { color: var(--olive-light); }
+    .day-2 .day-overline { color: var(--sea-light); }
+    .day-3 .day-overline { color: var(--olive-light); }
+    .day-4 .day-overline { color: var(--terracotta-light); }
+    .day-5 .day-overline { color: var(--gold); }
 
-    .day-1 .day-label { background: rgba(26,107,138,0.3); color: #5fc1e0; }
-    .day-2 .day-label { background: rgba(107,124,63,0.3); color: #a8c05c; }
-    .day-3 .day-label { background: rgba(45,143,165,0.3); color: #5fc1e0; }
-    .day-4 .day-label { background: rgba(232,115,74,0.3); color: #f4a942; }
-    .day-5 .day-label { background: rgba(244,169,66,0.3); color: #f4a942; }
+    .day-overline.visible { opacity: 1; transform: translateY(0); }
 
-    .day-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 8vw, 3.5rem);
-      font-weight: 700;
-      line-height: 1.1;
-      margin-bottom: 32px;
+    .day-hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(2.5rem, 9vw, 5rem);
+      line-height: 0.95;
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+      transform: translateY(25px);
+      transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+      letter-spacing: -0.02em;
     }
 
-    .day-title.visible { opacity: 1; transform: translateY(0); }
+    .day-hero-title.visible { opacity: 1; transform: translateY(0); }
 
-    /* ─── TIMELINE ─── */
-    .timeline {
+    /* ─── DAY BODY ─── */
+    .day-body {
+      padding: clamp(48px, 8vh, 100px) clamp(24px, 6vw, 80px);
+      background: var(--cream);
       position: relative;
-      padding-left: 32px;
     }
 
-    .timeline::before {
+    .day-body-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* ─── TIMELINE V2 ─── */
+    .tl {
+      position: relative;
+      padding-left: 40px;
+    }
+
+    .tl::before {
       content: '';
       position: absolute;
       left: 0;
       top: 0;
       bottom: 0;
-      width: 2px;
-      background: rgba(255,255,255,0.1);
+      width: 1px;
+      background: var(--sand);
     }
 
-    .timeline-line-fill {
+    .tl-fill {
       position: absolute;
       left: 0;
       top: 0;
-      width: 2px;
+      width: 1px;
       height: 0;
-      background: linear-gradient(180deg, var(--sunset-gold), var(--sunset));
-      transition: height 1.5s cubic-bezier(0.16, 1, 0.3, 1);
-      box-shadow: 0 0 8px rgba(244,169,66,0.4);
+      transition: height 2s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .timeline-item {
+    .day-1 .tl-fill { background: var(--olive); }
+    .day-2 .tl-fill { background: var(--sea); }
+    .day-3 .tl-fill { background: var(--olive); }
+    .day-4 .tl-fill { background: var(--terracotta); }
+    .day-5 .tl-fill { background: var(--gold); }
+
+    .tl-item {
       position: relative;
-      margin-bottom: 32px;
+      padding-bottom: clamp(28px, 4vh, 48px);
       opacity: 0;
-      transform: translateX(-20px);
+      transform: translateY(24px);
       transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .timeline-item.visible {
+    .tl-item.visible {
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
     }
 
-    .timeline-item::before {
+    .tl-item::before {
       content: '';
       position: absolute;
-      left: -37px;
+      left: -44px;
       top: 8px;
-      width: 12px;
-      height: 12px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
-      background: var(--dark);
-      border: 2px solid rgba(255,255,255,0.2);
+      border: 1.5px solid var(--sand);
+      background: var(--cream);
       transition: all 0.5s ease;
       z-index: 1;
     }
 
-    .timeline-item.visible::before {
-      border-color: var(--sunset-gold);
-      background: var(--sunset-gold);
-      box-shadow: 0 0 12px rgba(244,169,66,0.5);
-    }
+    .day-1 .tl-item.visible::before { border-color: var(--olive); background: var(--olive); }
+    .day-2 .tl-item.visible::before { border-color: var(--sea); background: var(--sea); }
+    .day-3 .tl-item.visible::before { border-color: var(--olive); background: var(--olive); }
+    .day-4 .tl-item.visible::before { border-color: var(--terracotta); background: var(--terracotta); }
+    .day-5 .tl-item.visible::before { border-color: var(--gold); background: var(--gold); }
 
-    .timeline-time {
-      font-size: 0.75rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
+    .tl-time {
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--sunset-gold);
-      margin-bottom: 6px;
-    }
-
-    .timeline-title {
-      font-size: 1.15rem;
-      font-weight: 600;
       margin-bottom: 4px;
+      font-weight: 500;
     }
 
-    .timeline-desc {
+    .day-1 .tl-time { color: var(--olive); }
+    .day-2 .tl-time { color: var(--sea); }
+    .day-3 .tl-time { color: var(--olive); }
+    .day-4 .tl-time { color: var(--terracotta); }
+    .day-5 .tl-time { color: var(--gold); }
+
+    .tl-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.3rem, 3.5vw, 1.7rem);
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--ink);
+      line-height: 1.2;
+    }
+
+    .tl-desc {
       font-size: 0.85rem;
-      line-height: 1.6;
-      opacity: 0.6;
+      line-height: 1.7;
+      color: var(--ink-light);
     }
 
-    .timeline-emoji {
-      position: absolute;
-      right: 0;
-      top: 0;
-      font-size: 1.8rem;
-      opacity: 0;
-      transform: scale(0.5) rotate(-20deg);
-      transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s;
-    }
+    /* stagger */
+    .tl-item:nth-child(2) { transition-delay: 0.05s; }
+    .tl-item:nth-child(3) { transition-delay: 0.1s; }
+    .tl-item:nth-child(4) { transition-delay: 0.15s; }
+    .tl-item:nth-child(5) { transition-delay: 0.2s; }
 
-    .timeline-item.visible .timeline-emoji {
-      opacity: 0.8;
-      transform: scale(1) rotate(0deg);
-    }
-
-    /* ─── HORIZONTAL SCROLL GALLERY ─── */
-    .gallery-strip {
-      position: relative;
-      margin: 40px -24px 0;
-      padding: 20px 24px;
+    /* ─── PHOTO CARDS ─── */
+    .photo-strip {
+      margin: clamp(24px, 4vh, 48px) calc(-1 * clamp(24px, 6vw, 80px)) 0;
+      padding: 0 clamp(24px, 6vw, 80px);
+      display: flex;
+      gap: 12px;
       overflow-x: auto;
       overflow-y: hidden;
-      display: flex;
-      gap: 16px;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
     }
 
-    .gallery-strip::-webkit-scrollbar { display: none; }
+    .photo-strip::-webkit-scrollbar { display: none; }
 
-    .gallery-card {
+    .photo-card {
       flex: 0 0 auto;
-      width: 200px;
-      height: 260px;
-      border-radius: 16px;
+      width: clamp(200px, 45vw, 280px);
+      aspect-ratio: 3 / 4;
+      border-radius: 12px;
       overflow: hidden;
       position: relative;
       scroll-snap-align: start;
       opacity: 0;
-      transform: scale(0.9);
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(20px) scale(0.95);
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .gallery-card.visible {
+    .photo-card.visible {
       opacity: 1;
-      transform: scale(1);
+      transform: translateY(0) scale(1);
     }
 
-    .gallery-card-bg {
+    .photo-card:nth-child(2) { transition-delay: 0.08s; }
+    .photo-card:nth-child(3) { transition-delay: 0.16s; }
+    .photo-card:nth-child(4) { transition-delay: 0.24s; }
+
+    .photo-card-inner {
       position: absolute;
       inset: 0;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 4rem;
-    }
-
-    .gallery-card-label {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 40px 16px 16px;
-      background: linear-gradient(transparent, rgba(0,0,0,0.8));
-      font-size: 0.8rem;
-      font-weight: 500;
-    }
-
-    /* ─── PARALLAX FLOATING ELEMENTS ─── */
-    .float-element {
-      position: absolute;
-      font-size: 2rem;
-      opacity: 0.15;
-      pointer-events: none;
-      will-change: transform;
-      z-index: 0;
-    }
-
-    /* ─── PROGRESS BAR ─── */
-    .progress-bar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--ocean), var(--sunset-gold), var(--sunset));
-      z-index: 1000;
-      width: 0%;
-      transition: width 0.1s linear;
-    }
-
-    /* ─── NAV DOTS ─── */
-    .nav-dots {
-      position: fixed;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 100;
-      display: flex;
       flex-direction: column;
-      gap: 12px;
+      justify-content: flex-end;
+      padding: 20px;
     }
 
-    .nav-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.2);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      border: none;
-      padding: 0;
-      position: relative;
-    }
-
-    .nav-dot.active {
-      background: var(--sunset-gold);
-      box-shadow: 0 0 10px rgba(244,169,66,0.5);
-      transform: scale(1.3);
-    }
-
-    .nav-dot-tooltip {
+    .photo-card-img {
       position: absolute;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.8);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      color: #fff;
-      font-size: 0.7rem;
-      padding: 4px 10px;
-      border-radius: 6px;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .nav-dot:hover .nav-dot-tooltip {
+    .photo-card:hover .photo-card-img,
+    .photo-card:active .photo-card-img {
+      transform: scale(1.05);
+    }
+
+    .photo-card-gradient {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(42,42,40,0.7) 0%, transparent 60%);
+      z-index: 1;
+    }
+
+    .photo-card-label {
+      position: relative;
+      z-index: 2;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--cream);
+    }
+
+    .photo-card-sub {
+      position: relative;
+      z-index: 2;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(250,247,242,0.6);
+      margin-top: 2px;
+    }
+
+    /* placeholder gradient backgrounds when no photo */
+    .ph-sea { background: linear-gradient(135deg, #5a8a9a, #7ab0be); }
+    .ph-olive { background: linear-gradient(135deg, #7a8b5c, #9aab7c); }
+    .ph-terra { background: linear-gradient(135deg, #c4754b, #d4956b); }
+    .ph-sand { background: linear-gradient(135deg, #c4a265, #d4c295); }
+    .ph-rose { background: linear-gradient(135deg, #c9a088, #d9c0a8); }
+    .ph-deep { background: linear-gradient(135deg, #3a6a7a, #5a9aaa); }
+
+    /* ─── FULL-WIDTH IMAGE BREAK ─── */
+    .img-break {
+      position: relative;
+      height: 50svh;
+      min-height: 300px;
+      overflow: hidden;
+    }
+
+    .img-break-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      background-attachment: scroll;
+    }
+
+    .img-break-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(42,42,40,0.3);
+    }
+
+    .img-break-text {
+      position: absolute;
+      bottom: clamp(24px, 5vh, 60px);
+      left: clamp(24px, 6vw, 80px);
+      color: var(--cream);
+      z-index: 2;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.8s ease;
+    }
+
+    .img-break-text.visible {
       opacity: 1;
+      transform: translateY(0);
+    }
+
+    .img-break-text h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      line-height: 1;
+    }
+
+    .img-break-text p {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.7;
+      margin-top: 8px;
     }
 
     /* ─── OUTRO ─── */
     .outro {
-      min-height: 60svh;
+      min-height: 80svh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 60px 24px;
-      background: linear-gradient(180deg, #1a1a2e 0%, var(--ocean-deep) 100%);
+      padding: clamp(60px, 10vh, 120px) 24px;
+      background: var(--ink);
+      color: var(--cream);
       position: relative;
       overflow: hidden;
-      scroll-snap-align: start;
+    }
+
+    .outro-grain {
+      position: absolute;
+      inset: 0;
+      opacity: 0.1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 200px;
+      pointer-events: none;
+    }
+
+    .outro-content {
+      position: relative;
+      z-index: 1;
     }
 
     .outro-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 8vw, 4rem);
-      font-weight: 700;
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(2.5rem, 10vw, 5rem);
+      line-height: 1;
       margin-bottom: 16px;
       opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
+      transform: translateY(25px);
+      transition: all 1s ease;
     }
 
     .outro-title.visible { opacity: 1; transform: translateY(0); }
 
-    .outro-sub {
-      font-size: 1rem;
+    .outro-names {
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
       opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.8s ease 0.2s;
-      color: rgba(255,255,255,0.6);
+      transition: all 1s ease 0.2s;
+      color: rgba(250,247,242,0.4);
     }
 
-    .outro-sub.visible { opacity: 0.7; transform: translateY(0); }
+    .outro-names.visible { opacity: 1; }
 
     .countdown {
-      margin-top: 40px;
+      margin-top: clamp(40px, 6vh, 80px);
       display: flex;
-      gap: 20px;
+      gap: clamp(20px, 5vw, 48px);
       opacity: 0;
       transform: translateY(20px);
-      transition: all 0.8s ease 0.4s;
+      transition: all 1s ease 0.4s;
     }
 
     .countdown.visible { opacity: 1; transform: translateY(0); }
 
-    .countdown-item {
-      text-align: center;
-    }
-
-    .countdown-number {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 8vw, 3.5rem);
-      font-weight: 700;
-      color: var(--sunset-gold);
+    .cd-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 10vw, 4.5rem);
+      font-weight: 300;
+      color: var(--terracotta-light);
       line-height: 1;
     }
 
-    .countdown-label {
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
+    .cd-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      opacity: 0.5;
-      margin-top: 4px;
+      opacity: 0.35;
+      margin-top: 6px;
     }
 
-    /* ─── STAGGER DELAYS ─── */
-    .timeline-item:nth-child(1) { transition-delay: 0s; }
-    .timeline-item:nth-child(2) { transition-delay: 0.1s; }
-    .timeline-item:nth-child(3) { transition-delay: 0.2s; }
-    .timeline-item:nth-child(4) { transition-delay: 0.3s; }
+    /* ─── SCROLL-DRIVEN ANIMATIONS ─── */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-up.visible { opacity: 1; transform: translateY(0); }
 
-    .gallery-card:nth-child(1) { transition-delay: 0s; }
-    .gallery-card:nth-child(2) { transition-delay: 0.1s; }
-    .gallery-card:nth-child(3) { transition-delay: 0.15s; }
-    .gallery-card:nth-child(4) { transition-delay: 0.2s; }
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
 
-    /* ─── MEDIA QUERIES ─── */
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+    .reveal-scale {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-scale.visible { opacity: 1; transform: scale(1); }
+
+    .reveal-rotate {
+      opacity: 0;
+      transform: rotate(-3deg) translateY(20px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal-rotate.visible { opacity: 1; transform: rotate(0) translateY(0); }
+
+    /* ─── HORIZONTAL RULE ─── */
+    .hr-reveal {
+      height: 1px;
+      background: var(--sand);
+      margin: clamp(32px, 5vh, 60px) 0;
+      transform-origin: left;
+      transform: scaleX(0);
+      transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .hr-reveal.visible { transform: scaleX(1); }
+
+    /* ─── QUOTE BLOCK ─── */
+    .quote-block {
+      padding: clamp(40px, 6vh, 80px) clamp(24px, 6vw, 80px);
+      text-align: center;
+      background: var(--warm);
+    }
+
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-weight: 300;
+      font-size: clamp(1.5rem, 4vw, 2.5rem);
+      line-height: 1.4;
+      color: var(--ink);
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease;
+    }
+    .quote-text.visible { opacity: 1; transform: translateY(0); }
+
+    .quote-attr {
+      margin-top: 16px;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--stone);
+      opacity: 0;
+      transition: opacity 1s ease 0.3s;
+    }
+    .quote-attr.visible { opacity: 1; }
+
+    /* ─── MEDIA ─── */
     @media (max-width: 480px) {
-      .nav-dots { right: 8px; gap: 10px; }
-      .nav-dot { width: 8px; height: 8px; }
-      .nav-dot-tooltip { display: none; }
-      .day-number { font-size: 8rem; right: -10%; }
-      .timeline { padding-left: 28px; }
-      .timeline-item::before { left: -33px; width: 10px; height: 10px; }
-      .gallery-card { width: 170px; height: 220px; }
-      .timeline-emoji { font-size: 1.4rem; }
+      .nav-dots { right: 10px; gap: 10px; }
+      .nav-dot { width: 6px; height: 6px; }
+      .flight-direction { min-width: 60px; font-size: 0.6rem; }
+      .flight-code { font-size: 1.5rem; }
+      .tl { padding-left: 32px; }
+      .tl-item::before { left: -36px; width: 7px; height: 7px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -750,304 +909,401 @@
 <div class="progress-bar" id="progressBar"></div>
 
 <nav class="nav-dots" id="navDots">
-  <button class="nav-dot active" data-section="hero"><span class="nav-dot-tooltip">Start</span></button>
-  <button class="nav-dot" data-section="flights"><span class="nav-dot-tooltip">Vluchten</span></button>
-  <button class="nav-dot" data-section="day1"><span class="nav-dot-tooltip">Dag 1</span></button>
-  <button class="nav-dot" data-section="day2"><span class="nav-dot-tooltip">Dag 2</span></button>
-  <button class="nav-dot" data-section="day3"><span class="nav-dot-tooltip">Dag 3</span></button>
-  <button class="nav-dot" data-section="day4"><span class="nav-dot-tooltip">Dag 4</span></button>
-  <button class="nav-dot" data-section="day5"><span class="nav-dot-tooltip">Dag 5</span></button>
-  <button class="nav-dot" data-section="outro"><span class="nav-dot-tooltip">Einde</span></button>
+  <button class="nav-dot active" data-section="hero"></button>
+  <button class="nav-dot" data-section="flights"></button>
+  <button class="nav-dot" data-section="day1"></button>
+  <button class="nav-dot" data-section="day2"></button>
+  <button class="nav-dot" data-section="day3"></button>
+  <button class="nav-dot" data-section="day4"></button>
+  <button class="nav-dot" data-section="day5"></button>
+  <button class="nav-dot" data-section="outro"></button>
 </nav>
 
-<!-- ════════ HERO ════════ -->
+<!-- ════════════════════════════════════════ -->
+<!-- HERO                                     -->
+<!-- ════════════════════════════════════════ -->
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
-  <div class="hero-waves">
-    <div class="wave">
-      <svg viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.08)" d="M0,224L48,213.3C96,203,192,181,288,186.7C384,192,480,224,576,229.3C672,235,768,213,864,186.7C960,160,1056,128,1152,138.7C1248,149,1344,203,1392,229.3L1440,256L1440,320L0,320Z"/></svg>
-    </div>
-    <div class="wave">
-      <svg viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.05)" d="M0,288L48,272C96,256,192,224,288,213.3C384,203,480,213,576,229.3C672,245,768,267,864,261.3C960,256,1056,224,1152,208C1248,192,1344,192,1392,192L1440,192L1440,320L0,320Z"/></svg>
-    </div>
-    <div class="wave">
-      <svg viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.03)" d="M0,256L48,261.3C96,267,192,277,288,272C384,267,480,245,576,234.7C672,224,768,224,864,234.7C960,245,1056,267,1152,261.3C1248,256,1344,224,1392,208L1440,192L1440,320L0,320Z"/></svg>
-    </div>
-  </div>
+  <div class="hero-grain"></div>
   <div class="hero-content">
-    <p class="hero-date">26 - 30 maart 2026</p>
+    <p class="hero-overline">26 &mdash; 30 maart 2026</p>
     <h1 class="hero-title">Xabia</h1>
-    <p class="hero-subtitle">Costa Blanca, Spanje</p>
-    <div class="hero-crew">
-      <span class="crew-tag">Matthijs</span>
-      <span class="crew-tag">Alexander</span>
-      <span class="crew-tag">Dirk</span>
+    <div class="hero-meta">
+      <span class="hero-meta-item">Costa Blanca, Spanje</span>
+      <span class="hero-meta-divider"></span>
+      <span class="hero-meta-item">Matthijs, Alexander &amp; Dirk</span>
     </div>
   </div>
-  <div class="scroll-hint">
-    <span></span>
-    <p>Scroll</p>
+  <div class="scroll-cue">
+    <div class="scroll-cue-line"></div>
   </div>
 </section>
 
-<!-- ════════ FLIGHTS ════════ -->
-<section class="flight-section" id="flights">
-  <div class="flight-path"></div>
-  <div class="flight-cards">
-    <div class="flight-card" data-scroll-reveal>
-      <div class="flight-card-header">
-        <span class="plane-icon">&#9992;</span>
-        <span>Heenvlucht &middot; 26 maart</span>
-      </div>
-      <div class="route">
-        <div class="airport">
-          <div class="airport-code">AMS</div>
-          <div class="airport-name">Schiphol</div>
-          <div class="airport-time">06:25</div>
+<!-- ════════════════════════════════════════ -->
+<!-- FLIGHTS                                  -->
+<!-- ════════════════════════════════════════ -->
+<section class="flights" id="flights">
+  <div class="flights-inner">
+    <p class="section-label reveal-up" data-reveal>Vluchten</p>
+    <h2 class="section-title reveal-up" data-reveal>Heen &amp; terug</h2>
+
+    <div class="flight-row" data-reveal>
+      <div class="flight-direction">Heen<br><span style="font-weight:300;opacity:0.6">26 mrt</span></div>
+      <div class="flight-route">
+        <span class="flight-code">AMS</span>
+        <div class="flight-line-wrap">
+          <div class="flight-line-track">
+            <div class="flight-line-dot flight-dot-anim"></div>
+          </div>
         </div>
-        <div class="flight-line"></div>
-        <div class="airport">
-          <div class="airport-code">ALC</div>
-          <div class="airport-name">Alicante</div>
-          <div class="airport-time">09:25</div>
+        <span class="flight-code">ALC</span>
+      </div>
+      <div class="flight-time"><strong>06:25</strong>09:25</div>
+    </div>
+
+    <div class="flight-row" data-reveal>
+      <div class="flight-direction">Terug<br><span style="font-weight:300;opacity:0.6">30 mrt</span></div>
+      <div class="flight-route">
+        <span class="flight-code">ALC</span>
+        <div class="flight-line-wrap">
+          <div class="flight-line-track">
+            <div class="flight-line-dot flight-dot-anim" style="animation-direction:reverse"></div>
+          </div>
+        </div>
+        <span class="flight-code">AMS</span>
+      </div>
+      <div class="flight-time"><strong>23:15</strong>02:00</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- DAG 1                                    -->
+<!-- ════════════════════════════════════════ -->
+<section class="day day-1" id="day1">
+  <div class="day-hero">
+    <div class="day-hero-bg"></div>
+    <div class="day-hero-photo" id="day1photo" style="background-image: url('image-f31493fe-eeeb-45b2-81a8-9641fd40bb76.jpg')"></div>
+    <div class="day-hero-grain"></div>
+    <div class="day-number-large" data-reveal>01</div>
+    <div class="day-hero-content">
+      <p class="day-overline" data-reveal>Donderdag 26 maart</p>
+      <h2 class="day-hero-title" data-reveal>Aankomen<br>&amp; Settelen</h2>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="day-body-inner">
+      <div class="tl">
+        <div class="tl-fill"></div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Ochtend</div>
+          <div class="tl-title">Landen in Alicante</div>
+          <div class="tl-desc">Om 9:25 staan we op Spaanse bodem. Huurauto ophalen en naar Javea rijden.</div>
+        </div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Middag</div>
+          <div class="tl-title">Huis in &amp; boodschappen</div>
+          <div class="tl-desc">Settelen in het huis, boodschappen scoren voor de komende dagen.</div>
+        </div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Middag</div>
+          <div class="tl-title">La Siesta</div>
+          <div class="tl-desc">Als het weer meewerkt ff naar La Siesta om bij te komen van de reis.</div>
+        </div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Avond</div>
+          <div class="tl-title">Eten thuis</div>
+          <div class="tl-desc">Simpel thuis eten. Moe van de vroege vlucht, early night.</div>
         </div>
       </div>
     </div>
-    <div class="flight-card" data-scroll-reveal>
-      <div class="flight-card-header">
-        <span class="plane-icon" style="display:inline-block;transform:scaleX(-1)">&#9992;</span>
-        <span>Terugvlucht &middot; 30 maart</span>
-      </div>
-      <div class="route">
-        <div class="airport">
-          <div class="airport-code">ALC</div>
-          <div class="airport-name">Alicante</div>
-          <div class="airport-time">23:15</div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════ -->
+<!-- DAG 2                                    -->
+<!-- ════════════════════════════════════════ -->
+<section class="day day-2" id="day2">
+  <div class="day-hero">
+    <div class="day-hero-bg"></div>
+    <div class="day-hero-photo" id="day2photo" style="background-image: url('download.jpg')"></div>
+    <div class="day-hero-grain"></div>
+    <div class="day-number-large" data-reveal>02</div>
+    <div class="day-hero-content">
+      <p class="day-overline" data-reveal>Vrijdag 27 maart</p>
+      <h2 class="day-hero-title" data-reveal>Stranden<br>&amp; Touren</h2>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="day-body-inner">
+      <div class="tl">
+        <div class="tl-fill"></div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Ochtend</div>
+          <div class="tl-title">Ontbijt bij Mira Luna</div>
+          <div class="tl-desc">Bij mooi weer ontbijten op het terras van Mira Luna.</div>
         </div>
-        <div class="flight-line"></div>
-        <div class="airport">
-          <div class="airport-code">AMS</div>
-          <div class="airport-name">Schiphol</div>
-          <div class="airport-time">02:00</div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Middag</div>
+          <div class="tl-title">Granadella &amp; Cala Clemence</div>
+          <div class="tl-desc">Touren langs de mooiste strandjes van de Costa Blanca. Granadella beach en Cala Clemence ontdekken.</div>
+        </div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Middag</div>
+          <div class="tl-title">Cala de Moraig</div>
+          <div class="tl-desc">Doorrijden richting Cala de Moraig. Spectaculaire rotskust met grot en kristalhelder water.</div>
+        </div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Avond</div>
+          <div class="tl-title">Dinner bij La Bambullah</div>
+          <div class="tl-desc">Uit eten bij La Bambullah. Goed eten, goede vibes.</div>
+        </div>
+      </div>
+
+      <div class="photo-strip">
+        <div class="photo-card reveal-scale" data-reveal>
+          <div class="photo-card-img ph-deep" style="background-image: url('download.jpg')"></div>
+          <div class="photo-card-gradient"></div>
+          <div class="photo-card-inner">
+            <div class="photo-card-label">Granadella</div>
+            <div class="photo-card-sub">Beach</div>
+          </div>
+        </div>
+        <div class="photo-card reveal-scale" data-reveal>
+          <div class="photo-card-img ph-sea" style="background-image: url('6555_cala-clemence.jpg')"></div>
+          <div class="photo-card-gradient"></div>
+          <div class="photo-card-inner">
+            <div class="photo-card-label">Cala Clemence</div>
+            <div class="photo-card-sub">Hidden cove</div>
+          </div>
+        </div>
+        <div class="photo-card reveal-scale" data-reveal>
+          <div class="photo-card-img ph-deep" style="background-image: url('photo0jpg.jpg')"></div>
+          <div class="photo-card-gradient"></div>
+          <div class="photo-card-inner">
+            <div class="photo-card-label">Cala de Moraig</div>
+            <div class="photo-card-sub">Benitatxell</div>
+          </div>
+        </div>
+        <div class="photo-card reveal-scale" data-reveal>
+          <div class="photo-card-img ph-terra" style="background-image: url('image-f31493fe-eeeb-45b2-81a8-9641fd40bb76.jpg')"></div>
+          <div class="photo-card-gradient"></div>
+          <div class="photo-card-inner">
+            <div class="photo-card-label">La Bambullah</div>
+            <div class="photo-card-sub">Dinner</div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ DAG 1 ════════ -->
-<section class="day-section day-1" id="day1">
-  <div class="day-bg-gradient day-1-bg"></div>
-  <div class="day-number">01</div>
-  <div class="float-element" style="top:15%;left:10%">&#127796;</div>
-  <div class="float-element" style="top:70%;right:8%">&#127754;</div>
-  <div class="day-content">
-    <div class="day-label" data-scroll-reveal>Donderdag 26 maart</div>
-    <h2 class="day-title" data-scroll-reveal>Aankomen &amp; Settelen</h2>
-    <div class="timeline">
-      <div class="timeline-line-fill"></div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#9992;&#65039;</span>
-        <div class="timeline-time">Ochtend</div>
-        <div class="timeline-title">Landen in Alicante</div>
-        <div class="timeline-desc">Om 9:25 staan we op Spaanse bodem. Huurauto pakken en rijden naar Javea.</div>
+<!-- IMAGE BREAK -->
+<div class="img-break">
+  <div class="img-break-bg ph-deep" style="background-image: url('photo0jpg.jpg')" id="imgBreak1"></div>
+  <div class="img-break-overlay"></div>
+  <div class="img-break-text" data-reveal>
+    <h3>Cala de Moraig</h3>
+    <p>Benitatxell &middot; Costa Blanca</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- DAG 3                                    -->
+<!-- ════════════════════════════════════════ -->
+<section class="day day-3" id="day3">
+  <div class="day-hero">
+    <div class="day-hero-bg"></div>
+    <div class="day-hero-photo" id="day3photo" style="background-image: url('photo0jpg.jpg')"></div>
+    <div class="day-hero-grain"></div>
+    <div class="day-number-large" data-reveal>03</div>
+    <div class="day-hero-content">
+      <p class="day-overline" data-reveal>Zaterdag 28 maart</p>
+      <h2 class="day-hero-title" data-reveal>Hiken<br>&amp; Moraira</h2>
+    </div>
+  </div>
+  <div class="day-body">
+    <div class="day-body-inner">
+      <div class="tl">
+        <div class="tl-fill"></div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Ochtend</div>
+          <div class="tl-title">Kleine hike</div>
+          <div class="tl-desc">De dag starten met een hike in de omgeving. Ontbijt thuis.</div>
+        </div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Middag</div>
+          <div class="tl-title">El Portet, Moraira</div>
+          <div class="tl-desc">Relaxen op het mooie strand van El Portet in Moraira. Zwemmen en zonnen.</div>
+        </div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Avond</div>
+          <div class="tl-title">Eten in het oude centrum</div>
+          <div class="tl-desc">Hapje eten in het historische centrum van Moraira. Tapas en genieten.</div>
+        </div>
       </div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#127968;</span>
-        <div class="timeline-time">Middag</div>
-        <div class="timeline-title">Huis in &amp; boodschappen</div>
-        <div class="timeline-desc">Lekker settelen in het huis. Boodschappen doen voor de komende dagen.</div>
-      </div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#127754;</span>
-        <div class="timeline-time">Middag</div>
-        <div class="timeline-title">La Siesta</div>
-        <div class="timeline-desc">Als het weer meewerkt ff naar La Siesta om bij te komen.</div>
-      </div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#127834;</span>
-        <div class="timeline-time">Avond</div>
-        <div class="timeline-title">Eten thuis</div>
-        <div class="timeline-desc">Lekker simpel thuis eten. Moe van de vroege vlucht, early night.</div>
+
+      <div class="photo-strip">
+        <div class="photo-card reveal-scale" data-reveal>
+          <div class="photo-card-img ph-olive" style="background-image: url('download.jpg')"></div>
+          <div class="photo-card-gradient"></div>
+          <div class="photo-card-inner">
+            <div class="photo-card-label">Hike</div>
+            <div class="photo-card-sub">Morning walk</div>
+          </div>
+        </div>
+        <div class="photo-card reveal-scale" data-reveal>
+          <div class="photo-card-img ph-sea" style="background-image: url('photo0jpg.jpg')"></div>
+          <div class="photo-card-gradient"></div>
+          <div class="photo-card-inner">
+            <div class="photo-card-label">El Portet</div>
+            <div class="photo-card-sub">Moraira</div>
+          </div>
+        </div>
+        <div class="photo-card reveal-scale" data-reveal>
+          <div class="photo-card-img ph-rose" style="background-image: url('6555_cala-clemence.jpg')"></div>
+          <div class="photo-card-gradient"></div>
+          <div class="photo-card-inner">
+            <div class="photo-card-label">Oude Centrum</div>
+            <div class="photo-card-sub">Moraira</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ DAG 2 ════════ -->
-<section class="day-section day-2" id="day2">
-  <div class="day-bg-gradient day-2-bg"></div>
-  <div class="day-number">02</div>
-  <div class="float-element" style="top:20%;right:15%">&#127758;</div>
-  <div class="float-element" style="bottom:20%;left:5%">&#9973;</div>
-  <div class="day-content">
-    <div class="day-label" data-scroll-reveal>Vrijdag 27 maart</div>
-    <h2 class="day-title" data-scroll-reveal>Stranden &amp; Touren</h2>
-    <div class="timeline">
-      <div class="timeline-line-fill"></div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#9749;</span>
-        <div class="timeline-time">Ochtend</div>
-        <div class="timeline-title">Ontbijt bij Mira Luna</div>
-        <div class="timeline-desc">Bij mooi weer ontbijten op het terras van Mira Luna.</div>
-      </div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#127958;</span>
-        <div class="timeline-time">Middag</div>
-        <div class="timeline-title">Granadella &amp; Cala Clemence</div>
-        <div class="timeline-desc">Touren langs de mooiste strandjes. Granadella beach en Cala Clemence bezoeken.</div>
-      </div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#127860;</span>
-        <div class="timeline-time">Avond</div>
-        <div class="timeline-title">Dinner bij La Bambullah</div>
-        <div class="timeline-desc">Uit eten bij La Bambullah. Goed eten, goede vibes.</div>
-      </div>
+<!-- QUOTE BREAK -->
+<div class="quote-block">
+  <p class="quote-text" data-reveal>&ldquo;Life is either a daring adventure or nothing at all.&rdquo;</p>
+  <p class="quote-attr" data-reveal>&mdash; Helen Keller</p>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- DAG 4                                    -->
+<!-- ════════════════════════════════════════ -->
+<section class="day day-4" id="day4">
+  <div class="day-hero">
+    <div class="day-hero-bg"></div>
+    <div class="day-hero-photo" id="day4photo" style="background-image: url('6555_cala-clemence.jpg')"></div>
+    <div class="day-hero-grain"></div>
+    <div class="day-number-large" data-reveal>04</div>
+    <div class="day-hero-content">
+      <p class="day-overline" data-reveal>Zondag 29 maart</p>
+      <h2 class="day-hero-title" data-reveal>Denia &amp;<br>Mega BBQ</h2>
     </div>
-    <div class="gallery-strip">
-      <div class="gallery-card" data-scroll-reveal style="background: linear-gradient(135deg, #0d3d50, #1a6b8a);">
-        <div class="gallery-card-bg">&#127754;</div>
-        <div class="gallery-card-label">Granadella Beach</div>
+  </div>
+  <div class="day-body">
+    <div class="day-body-inner">
+      <div class="tl">
+        <div class="tl-fill"></div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Ochtend</div>
+          <div class="tl-title">Chill ochtend thuis</div>
+          <div class="tl-desc">Uitslapen en relaxen bij het huis. Niks moeten, niks hoeven.</div>
+        </div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Middag</div>
+          <div class="tl-title">Denia bezoeken</div>
+          <div class="tl-desc">Trip naar Denia. Kasteel, haven, en de oude stad verkennen.</div>
+        </div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Avond</div>
+          <div class="tl-title">MEGA BBQ</div>
+          <div class="tl-desc">Het hoogtepunt van de trip: mega barbecue thuis. Vlees, vis, alles erop en eraan.</div>
+        </div>
       </div>
-      <div class="gallery-card" data-scroll-reveal style="background: linear-gradient(135deg, #1a6b8a, #2d8fa5);">
-        <div class="gallery-card-bg">&#9973;</div>
-        <div class="gallery-card-label">Cala Clemence</div>
-      </div>
-      <div class="gallery-card" data-scroll-reveal style="background: linear-gradient(135deg, #e8734a, #f4a942);">
-        <div class="gallery-card-bg">&#127860;</div>
-        <div class="gallery-card-label">La Bambullah</div>
+
+      <div class="photo-strip">
+        <div class="photo-card reveal-scale" data-reveal>
+          <div class="photo-card-img ph-sand" style="background-image: url('6555_cala-clemence.jpg')"></div>
+          <div class="photo-card-gradient"></div>
+          <div class="photo-card-inner">
+            <div class="photo-card-label">Denia</div>
+            <div class="photo-card-sub">Kasteel &amp; haven</div>
+          </div>
+        </div>
+        <div class="photo-card reveal-scale" data-reveal>
+          <div class="photo-card-img ph-terra" style="background-image: url('image-f31493fe-eeeb-45b2-81a8-9641fd40bb76.jpg')"></div>
+          <div class="photo-card-gradient"></div>
+          <div class="photo-card-inner">
+            <div class="photo-card-label">Mega BBQ</div>
+            <div class="photo-card-sub">Het hoogtepunt</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ DAG 3 ════════ -->
-<section class="day-section day-3" id="day3">
-  <div class="day-bg-gradient day-3-bg"></div>
-  <div class="day-number">03</div>
-  <div class="float-element" style="top:25%;left:8%">&#127956;</div>
-  <div class="float-element" style="bottom:15%;right:10%">&#127958;</div>
-  <div class="day-content">
-    <div class="day-label" data-scroll-reveal>Zaterdag 28 maart</div>
-    <h2 class="day-title" data-scroll-reveal>Hiken &amp; Moraira</h2>
-    <div class="timeline">
-      <div class="timeline-line-fill"></div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#129406;</span>
-        <div class="timeline-time">Ochtend</div>
-        <div class="timeline-title">Kleine hike</div>
-        <div class="timeline-desc">De dag beginnen met een kleine hike in de omgeving. Ontbijt thuis.</div>
-      </div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#127958;</span>
-        <div class="timeline-time">Middag</div>
-        <div class="timeline-title">El Portet, Moraira</div>
-        <div class="timeline-desc">Relaxen op het strand van El Portet in Moraira. Zwemmen en chillen.</div>
-      </div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#127831;</span>
-        <div class="timeline-time">Avond</div>
-        <div class="timeline-title">Eten in het oude centrum</div>
-        <div class="timeline-desc">Hapje eten in het historische centrum van Moraira. Tapas en genieten.</div>
-      </div>
+<!-- IMAGE BREAK 2 -->
+<div class="img-break">
+  <div class="img-break-bg ph-terra" style="background-image: url('image-f31493fe-eeeb-45b2-81a8-9641fd40bb76.jpg')" id="imgBreak2"></div>
+  <div class="img-break-overlay"></div>
+  <div class="img-break-text" data-reveal>
+    <h3>Golden hour</h3>
+    <p>Costa Blanca sunsets</p>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════ -->
+<!-- DAG 5                                    -->
+<!-- ════════════════════════════════════════ -->
+<section class="day day-5" id="day5">
+  <div class="day-hero">
+    <div class="day-hero-bg"></div>
+    <div class="day-hero-photo" id="day5photo" style="background-image: url('image-f31493fe-eeeb-45b2-81a8-9641fd40bb76.jpg')"></div>
+    <div class="day-hero-grain"></div>
+    <div class="day-number-large" data-reveal>05</div>
+    <div class="day-hero-content">
+      <p class="day-overline" data-reveal>Maandag 30 maart</p>
+      <h2 class="day-hero-title" data-reveal>Laatste dag<br>&amp; terug</h2>
     </div>
-    <div class="gallery-strip">
-      <div class="gallery-card" data-scroll-reveal style="background: linear-gradient(135deg, #6b7c3f, #8fa05c);">
-        <div class="gallery-card-bg">&#127956;</div>
-        <div class="gallery-card-label">Hike</div>
-      </div>
-      <div class="gallery-card" data-scroll-reveal style="background: linear-gradient(135deg, #2d8fa5, #5fc1e0);">
-        <div class="gallery-card-bg">&#127754;</div>
-        <div class="gallery-card-label">El Portet</div>
-      </div>
-      <div class="gallery-card" data-scroll-reveal style="background: linear-gradient(135deg, #c97b3a, #e8a04a);">
-        <div class="gallery-card-bg">&#127831;</div>
-        <div class="gallery-card-label">Oude Centrum</div>
+  </div>
+  <div class="day-body">
+    <div class="day-body-inner">
+      <div class="tl">
+        <div class="tl-fill"></div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">Overdag</div>
+          <div class="tl-title">Vrij te besteden</div>
+          <div class="tl-desc">De hele dag is vrij. Nog een keer strand, rondwandelen, of gewoon chillen bij het huis.</div>
+        </div>
+        <div class="tl-item" data-reveal>
+          <div class="tl-time">23:15</div>
+          <div class="tl-title">Terug naar huis</div>
+          <div class="tl-desc">Avondvlucht vanuit Alicante. Om 2:00 weer in Nederland. Tot de volgende trip.</div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ════════ DAG 4 ════════ -->
-<section class="day-section day-4" id="day4">
-  <div class="day-bg-gradient day-4-bg"></div>
-  <div class="day-number">04</div>
-  <div class="float-element" style="top:18%;right:12%">&#128293;</div>
-  <div class="float-element" style="bottom:25%;left:10%">&#127958;</div>
-  <div class="day-content">
-    <div class="day-label" data-scroll-reveal>Zondag 29 maart</div>
-    <h2 class="day-title" data-scroll-reveal>Denia &amp; Mega BBQ</h2>
-    <div class="timeline">
-      <div class="timeline-line-fill"></div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#128524;</span>
-        <div class="timeline-time">Ochtend</div>
-        <div class="timeline-title">Chill ochtend thuis</div>
-        <div class="timeline-desc">Uitslapen en relaxen bij het huis. Niks moeten.</div>
-      </div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#127961;</span>
-        <div class="timeline-time">Middag</div>
-        <div class="timeline-title">Denia bezoeken</div>
-        <div class="timeline-desc">Trip naar Denia. Kasteel, haven, oude stad verkennen.</div>
-      </div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#128293;</span>
-        <div class="timeline-time">Avond</div>
-        <div class="timeline-title">MEGA BBQ</div>
-        <div class="timeline-desc">Het hoogtepunt: mega barbecue thuis. Vlees, vis, en alles erop en eraan.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════ DAG 5 ════════ -->
-<section class="day-section day-5" id="day5">
-  <div class="day-bg-gradient day-5-bg"></div>
-  <div class="day-number">05</div>
-  <div class="float-element" style="top:20%;left:12%">&#127774;</div>
-  <div class="float-element" style="bottom:20%;right:8%">&#9992;</div>
-  <div class="day-content">
-    <div class="day-label" data-scroll-reveal>Maandag 30 maart</div>
-    <h2 class="day-title" data-scroll-reveal>Laatste Dag &amp; Terug</h2>
-    <div class="timeline">
-      <div class="timeline-line-fill"></div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#127774;</span>
-        <div class="timeline-time">Overdag</div>
-        <div class="timeline-title">Vrij te besteden</div>
-        <div class="timeline-desc">Laatste dag is helemaal vrij. Nog een keer naar het strand, rondwandelen, of gewoon chillen.</div>
-      </div>
-      <div class="timeline-item" data-scroll-reveal>
-        <span class="timeline-emoji">&#9992;&#65039;</span>
-        <div class="timeline-time">23:15</div>
-        <div class="timeline-title">Terug naar huis</div>
-        <div class="timeline-desc">Avondvlucht vanuit Alicante. Om 2:00 weer in Nederland. Tot de volgende!</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ════════ OUTRO ════════ -->
+<!-- ════════════════════════════════════════ -->
+<!-- OUTRO                                    -->
+<!-- ════════════════════════════════════════ -->
 <section class="outro" id="outro">
-  <h2 class="outro-title" data-scroll-reveal>Nos vemos en Xabia</h2>
-  <p class="outro-sub" data-scroll-reveal>Matthijs, Alexander &amp; Dirk</p>
-  <div class="countdown" data-scroll-reveal id="countdown">
-    <div class="countdown-item">
-      <div class="countdown-number" id="cd-days">--</div>
-      <div class="countdown-label">Dagen</div>
-    </div>
-    <div class="countdown-item">
-      <div class="countdown-number" id="cd-hours">--</div>
-      <div class="countdown-label">Uren</div>
-    </div>
-    <div class="countdown-item">
-      <div class="countdown-number" id="cd-mins">--</div>
-      <div class="countdown-label">Min</div>
-    </div>
-    <div class="countdown-item">
-      <div class="countdown-number" id="cd-secs">--</div>
-      <div class="countdown-label">Sec</div>
+  <div class="outro-grain"></div>
+  <div class="outro-content">
+    <h2 class="outro-title" data-reveal>Nos vemos en Xabia</h2>
+    <p class="outro-names" data-reveal>Matthijs &middot; Alexander &middot; Dirk</p>
+    <div class="countdown" data-reveal id="countdown">
+      <div>
+        <div class="cd-num" id="cd-days">--</div>
+        <div class="cd-label">Dagen</div>
+      </div>
+      <div>
+        <div class="cd-num" id="cd-hours">--</div>
+        <div class="cd-label">Uren</div>
+      </div>
+      <div>
+        <div class="cd-num" id="cd-mins">--</div>
+        <div class="cd-label">Min</div>
+      </div>
+      <div>
+        <div class="cd-num" id="cd-secs">--</div>
+        <div class="cd-label">Sec</div>
+      </div>
     </div>
   </div>
 </section>
@@ -1056,170 +1312,171 @@
 (function() {
   'use strict';
 
-  // ─── INTERSECTION OBSERVER FOR SCROLL REVEALS ───
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
+  // ─── SCROLL REVEAL (IntersectionObserver) ───
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('[data-reveal]').forEach(el => revealObs.observe(el));
+
+  // ─── TIMELINE FILL ───
+  const tlObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const fill = e.target.querySelector('.tl-fill');
+        if (fill) setTimeout(() => fill.style.height = '100%', 200);
       }
     });
-  }, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -50px 0px'
-  });
+  }, { threshold: 0.15 });
 
-  document.querySelectorAll('[data-scroll-reveal]').forEach(el => {
-    revealObserver.observe(el);
-  });
-
-  // ─── TIMELINE LINE FILL ───
-  const timelineObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const fill = entry.target.querySelector('.timeline-line-fill');
-        if (fill) {
-          setTimeout(() => { fill.style.height = '100%'; }, 300);
-        }
-      }
-    });
-  }, { threshold: 0.2 });
-
-  document.querySelectorAll('.timeline').forEach(tl => {
-    timelineObserver.observe(tl);
-  });
+  document.querySelectorAll('.tl').forEach(tl => tlObs.observe(tl));
 
   // ─── PROGRESS BAR ───
   const progressBar = document.getElementById('progressBar');
 
-  function updateProgress() {
-    const scrollTop = window.scrollY;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    progressBar.style.width = progress + '%';
-  }
-
   // ─── NAV DOTS ───
-  const sections = ['hero','flights','day1','day2','day3','day4','day5','outro'];
+  const sectionIds = ['hero','flights','day1','day2','day3','day4','day5','outro'];
   const dots = document.querySelectorAll('.nav-dot');
-
-  function updateNavDots() {
-    const scrollPos = window.scrollY + window.innerHeight / 3;
-    let activeIdx = 0;
-
-    sections.forEach((id, i) => {
-      const el = document.getElementById(id);
-      if (el && el.offsetTop <= scrollPos) {
-        activeIdx = i;
-      }
-    });
-
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === activeIdx);
-    });
-  }
 
   dots.forEach(dot => {
     dot.addEventListener('click', () => {
-      const sectionId = dot.dataset.section;
-      const el = document.getElementById(sectionId);
+      const el = document.getElementById(dot.dataset.section);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     });
   });
 
-  // ─── PARALLAX FLOAT ELEMENTS ───
-  const floatElements = document.querySelectorAll('.float-element');
-
-  function updateParallax() {
-    const scrollY = window.scrollY;
-    floatElements.forEach((el, i) => {
-      const speed = 0.03 + (i % 3) * 0.02;
-      const yOffset = scrollY * speed;
-      const xOffset = Math.sin(scrollY * 0.002 + i) * 15;
-      el.style.transform = `translate(${xOffset}px, ${-yOffset}px)`;
-    });
-  }
-
-  // ─── SCROLL HANDLER WITH RAF ───
+  // ─── CONTINUOUS SCROLL-DRIVEN EFFECTS ───
   let ticking = false;
 
   function onScroll() {
-    if (!ticking) {
-      requestAnimationFrame(() => {
-        updateProgress();
-        updateNavDots();
-        updateParallax();
-        ticking = false;
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const scrollY = window.scrollY;
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docH > 0 ? (scrollY / docH) * 100 : 0;
+      progressBar.style.width = progress + '%';
+
+      // Nav dots
+      const scrollPos = scrollY + window.innerHeight * 0.33;
+      let activeIdx = 0;
+      sectionIds.forEach((id, i) => {
+        const el = document.getElementById(id);
+        if (el && el.offsetTop <= scrollPos) activeIdx = i;
       });
-      ticking = true;
-    }
+      dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+
+      // Hero parallax + fade
+      const hero = document.getElementById('hero');
+      const heroContent = hero.querySelector('.hero-content');
+      if (hero && heroContent) {
+        const hRect = hero.getBoundingClientRect();
+        if (hRect.bottom > 0) {
+          const s = Math.max(0, -hRect.top);
+          heroContent.style.transform = `translateY(${s * 0.35}px)`;
+          heroContent.style.opacity = Math.max(0, 1 - s / (window.innerHeight * 0.5));
+        }
+      }
+
+      // Day hero photo parallax (subtle zoom + shift on scroll)
+      document.querySelectorAll('.day-hero-photo').forEach(photo => {
+        const rect = photo.closest('.day-hero').getBoundingClientRect();
+        const vh = window.innerHeight;
+        const visible = rect.top < vh && rect.bottom > 0;
+        if (visible) {
+          const ratio = (vh - rect.top) / (vh + rect.height);
+          const yShift = (ratio - 0.5) * 30;
+          const scale = 1 + ratio * 0.08;
+          photo.style.transform = `translateY(${yShift}px) scale(${scale})`;
+        }
+      });
+
+      // Image break parallax
+      document.querySelectorAll('.img-break-bg').forEach(bg => {
+        const rect = bg.closest('.img-break').getBoundingClientRect();
+        const vh = window.innerHeight;
+        if (rect.top < vh && rect.bottom > 0) {
+          const ratio = (vh - rect.top) / (vh + rect.height);
+          const yShift = (ratio - 0.5) * 50;
+          bg.style.transform = `translateY(${yShift}px) scale(1.1)`;
+        }
+      });
+
+      // Day number parallax (moves up slower)
+      document.querySelectorAll('.day-number-large').forEach(num => {
+        const rect = num.closest('.day-hero').getBoundingClientRect();
+        const vh = window.innerHeight;
+        if (rect.top < vh && rect.bottom > 0) {
+          const ratio = (vh - rect.top) / (vh + rect.height);
+          const yShift = (ratio - 0.5) * -40;
+          if (num.classList.contains('visible')) {
+            num.style.transform = `translateY(calc(-50% + ${yShift}px))`;
+          }
+        }
+      });
+
+      // Flight cards - parallax stagger
+      document.querySelectorAll('.flight-row.visible').forEach((row, i) => {
+        const rect = row.getBoundingClientRect();
+        const vh = window.innerHeight;
+        if (rect.top < vh && rect.bottom > 0) {
+          const ratio = (vh - rect.top) / vh;
+          const xShift = (1 - ratio) * (i % 2 === 0 ? -15 : 15);
+          row.style.transform = `translateX(${xShift}px)`;
+        }
+      });
+
+      // Quote text - scale with scroll
+      document.querySelectorAll('.quote-text').forEach(q => {
+        const rect = q.getBoundingClientRect();
+        const vh = window.innerHeight;
+        if (rect.top < vh && rect.bottom > 0) {
+          const ratio = Math.min(1, Math.max(0, (vh - rect.top) / vh));
+          const scale = 0.92 + ratio * 0.08;
+          if (q.classList.contains('visible')) {
+            q.style.transform = `scale(${scale})`;
+          }
+        }
+      });
+
+      // Photo cards - subtle rotation on scroll
+      document.querySelectorAll('.photo-card.visible').forEach((card, i) => {
+        const rect = card.getBoundingClientRect();
+        const vh = window.innerHeight;
+        if (rect.top < vh && rect.bottom > 0) {
+          const ratio = (vh - rect.top) / vh;
+          const rot = (1 - ratio) * (i % 2 === 0 ? 2 : -2);
+          card.style.transform = `rotate(${rot}deg)`;
+        }
+      });
+
+      ticking = false;
+    });
   }
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
-
-  // Initial calls
-  updateProgress();
-  updateNavDots();
+  onScroll();
 
   // ─── COUNTDOWN ───
   const tripDate = new Date('2026-03-26T06:25:00+01:00');
 
-  function updateCountdown() {
-    const now = new Date();
-    const diff = tripDate - now;
-
-    if (diff <= 0) {
-      document.getElementById('cd-days').textContent = '0';
-      document.getElementById('cd-hours').textContent = '0';
-      document.getElementById('cd-mins').textContent = '0';
-      document.getElementById('cd-secs').textContent = '0';
-      return;
-    }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-    document.getElementById('cd-days').textContent = days;
-    document.getElementById('cd-hours').textContent = hours;
-    document.getElementById('cd-mins').textContent = mins;
-    document.getElementById('cd-secs').textContent = secs;
+  function tick() {
+    const diff = Math.max(0, tripDate - new Date());
+    const d = Math.floor(diff / 864e5);
+    const h = Math.floor((diff % 864e5) / 36e5);
+    const m = Math.floor((diff % 36e5) / 6e4);
+    const s = Math.floor((diff % 6e4) / 1e3);
+    document.getElementById('cd-days').textContent = d;
+    document.getElementById('cd-hours').textContent = h;
+    document.getElementById('cd-mins').textContent = m;
+    document.getElementById('cd-secs').textContent = s;
   }
 
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-
-  // ─── HERO PARALLAX ON SCROLL ───
-  const heroContent = document.querySelector('.hero-content');
-  const heroSection = document.querySelector('.hero');
-
-  function heroParallax() {
-    if (!heroSection || !heroContent) return;
-    const rect = heroSection.getBoundingClientRect();
-    if (rect.bottom < 0) return;
-    const scrolled = -rect.top;
-    if (scrolled > 0) {
-      heroContent.style.transform = `translateY(${scrolled * 0.4}px)`;
-      heroContent.style.opacity = Math.max(0, 1 - scrolled / (window.innerHeight * 0.6));
-    } else {
-      heroContent.style.transform = 'translateY(0)';
-      heroContent.style.opacity = 1;
-    }
-  }
-
-  // Add hero parallax to scroll handler
-  const origOnScroll = onScroll;
-  let heroTicking = false;
-  window.addEventListener('scroll', () => {
-    if (!heroTicking) {
-      requestAnimationFrame(() => {
-        heroParallax();
-        heroTicking = false;
-      });
-      heroTicking = true;
-    }
-  }, { passive: true });
+  tick();
+  setInterval(tick, 1000);
 
 })();
 </script>
